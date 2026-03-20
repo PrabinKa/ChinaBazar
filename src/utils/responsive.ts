@@ -2,7 +2,10 @@ import { Dimensions, ScaledSize, PixelRatio } from 'react-native';
 
 const { width: SCREEN_WIDTH, height: SCREEN_HEIGHT } = Dimensions.get('window');
 
-export const WINDOW: ScaledSize = { width: SCREEN_WIDTH, height: SCREEN_HEIGHT };
+export const WINDOW: ScaledSize = {
+  width: SCREEN_WIDTH,
+  height: SCREEN_HEIGHT,
+};
 
 // Device type based on width
 export const IS_SMALL_DEVICE = SCREEN_WIDTH < 375;
@@ -25,42 +28,47 @@ export const MODERATE_SCALE = Math.min(WIDTH_SCALE, HEIGHT_SCALE);
 // Pixel density
 const FONT_SCALE = PixelRatio.getFontScale(); // Adjusts font for user font settings
 
-
 // Responsive font size
-export const responsiveFontSize = (size: number, maxScale: number = 1.2) => {
+const responsiveFontSize = (size: number, maxScale: number = 1.2) => {
   const scaledSize = size * Math.min(WIDTH_SCALE, maxScale);
   // Normalize font for pixel density and user font settings
   return Math.round(PixelRatio.roundToNearestPixel(scaledSize)) / FONT_SCALE;
 };
 
 // Responsive width
-export const responsiveWidth = (width: number) => {
+const responsiveWidth = (width: number) => {
   const scaledWidth = width * WIDTH_SCALE;
   return Math.round(PixelRatio.roundToNearestPixel(scaledWidth));
 };
 
 // Responsive height
-export const responsiveHeight = (height: number) => {
+const responsiveHeight = (height: number) => {
   const scaledHeight = height * HEIGHT_SCALE;
   return Math.round(PixelRatio.roundToNearestPixel(scaledHeight));
 };
 
 // Responsive general size (square)
-export const responsiveSize = (size: number) => {
+const responsiveSize = (size: number) => {
   const scaled = size * MODERATE_SCALE;
   return Math.round(PixelRatio.roundToNearestPixel(scaled));
 };
 
 // Responsive spacing/margin/padding
-export const responsiveSpacing = (spacing: number) => {
+const responsiveSpacing = (spacing: number) => {
   const scaled = spacing * MODERATE_SCALE;
   return Math.round(PixelRatio.roundToNearestPixel(scaled));
 };
 
-// Convenient padding helpers
-export const responsiveHorizontalPadding = (basePadding = 16) => responsiveSpacing(basePadding);
-export const responsiveVerticalPadding = (basePadding = 16) => responsiveSpacing(basePadding);
-
 // Percentage-based dimensions
-export const percentageWidth = (percentage: number) => (SCREEN_WIDTH * percentage) / 100;
-export const percentageHeight = (percentage: number) => (SCREEN_HEIGHT * percentage) / 100;
+const percentageWidth = (percentage: number) =>
+  (SCREEN_WIDTH * percentage) / 100;
+const percentageHeight = (percentage: number) =>
+  (SCREEN_HEIGHT * percentage) / 100;
+
+export const rf = responsiveFontSize;
+export const rw = responsiveWidth;
+export const rh = responsiveHeight;
+export const rs = responsiveSize;
+export const spacing = responsiveSpacing;
+export const pw = percentageWidth;
+export const ph = percentageHeight;

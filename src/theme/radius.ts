@@ -7,8 +7,4 @@ export const RADIUS = {
   full: 9999,
 } as const;
 
-export const getRadius = (key: keyof typeof RADIUS): number => {
-  return RADIUS[key] ?? RADIUS.md;
-};
-
 export type RadiusKey = keyof typeof RADIUS;

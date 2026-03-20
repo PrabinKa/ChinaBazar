@@ -1,5 +1,3 @@
-import { ViewStyle, Platform } from 'react-native';
-
 export const SHADOWS = {
   sm: {
     shadowColor: '#000',
@@ -23,20 +21,5 @@ export const SHADOWS = {
     elevation: 8,
   },
 } as const;
-
-export const getShadow = (
-  size: keyof typeof SHADOWS,
-  color: string = '#000'
-): ViewStyle => {
-  const shadow = SHADOWS[size];
-
-  return {
-    shadowColor: color,
-    shadowOffset: shadow.shadowOffset,
-    shadowOpacity: shadow.shadowOpacity,
-    shadowRadius: shadow.shadowRadius,
-    elevation: Platform.OS === 'android' ? shadow.elevation : undefined,
-  };
-};
 
 export type ShadowKey = keyof typeof SHADOWS;

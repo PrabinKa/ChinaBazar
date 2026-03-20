@@ -8,8 +8,8 @@ import Account from '../../screens/account/Account';
 import { IconName } from '../../types/icon';
 import { RouteProp } from '@react-navigation/native';
 import Ionicons from '@react-native-vector-icons/ionicons';
-import { COLORS } from '../../theme/colors';
 import { TouchableOpacity } from 'react-native';
+import { colors } from '../../theme';
 
 type TabParamList = {
   Home: undefined;
@@ -64,8 +64,8 @@ const BottomTabNav = () => {
 
           return <Ionicons name={iconName} size={size} color={color} />;
         },
-        tabBarActiveTintColor: COLORS.primary,
-        tabBarInactiveTintColor: COLORS.textPrimary,
+        tabBarActiveTintColor: colors.primary,
+        tabBarInactiveTintColor: colors.textPrimary,
         tabBarButton: props => (
           <TouchableOpacity {...(props as any)} activeOpacity={1} />
         ),
