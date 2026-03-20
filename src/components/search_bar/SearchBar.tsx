@@ -36,7 +36,7 @@ export const SearchBar = ({
       {...(isButton && { onPress })}
       style={[styles.container, layout.spaceBetweenRow]}
     >
-      <View style={layout.centerRow}>
+      <View style={[layout.centerRow, {flex: 1}]}>
         <Ionicons
           name="search-outline"
           size={18}
@@ -70,7 +70,7 @@ const styles = StyleSheet.create({
   container: {
     flex: 1,
     height: rh(48),
-    backgroundColor: colors.surfaceVariant,
+    backgroundColor: colors.background,
     paddingLeft: spacing(12),
     paddingRight: spacing(5),
     borderRadius: radius.full,

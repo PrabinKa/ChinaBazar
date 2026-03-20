@@ -1,5 +1,5 @@
 import React from 'react';
-import { StyleSheet, TouchableOpacity, View } from 'react-native';
+import { Pressable, StyleSheet, TouchableOpacity, View } from 'react-native';
 import Ionicons from '@react-native-vector-icons/ionicons';
 import { IconName } from '../../types/icon';
 import { layout, rh, rw, spacing } from '../../utils';
@@ -49,28 +49,23 @@ export const Header = ({
 }: HeaderProps) => {
   return (
     <View style={[styles.container, layout.spaceBetweenRow]}>
-      
       {/* Left Icon*/}
-      {leftIcon ? (
-        <HeaderActionButton iconName={leftIcon} onPress={onLeftPress} />
-      ) : (
-        <View style={styles.placeholder} />
+      {leftIcon && (
+        <Pressable onPress={onLeftPress}>
+          <Ionicons name={leftIcon} size={25} color={colors.textPrimary} />
+        </Pressable>
       )}
 
       {/* Search*/}
-      {showSearch && <SearchBar mode='input' onPress={onSearchPress} />}
+      {showSearch && <SearchBar mode="input" onPress={onSearchPress} />}
 
       {/* Right Icon*/}
-      {rightIcon ? (
+      {rightIcon && (
         <HeaderActionButton iconName={rightIcon} onPress={onRightPress} />
-      ) : (
-        <View style={styles.placeholder} />
       )}
-
     </View>
   );
 };
-
 
 const styles = StyleSheet.create({
   container: {
@@ -83,7 +78,7 @@ const styles = StyleSheet.create({
     backgroundColor: colors.surfaceVariant,
     borderRadius: radius.full,
   },
-    placeholder: {
+  placeholder: {
     height: rh(48),
     width: rw(48),
   },
