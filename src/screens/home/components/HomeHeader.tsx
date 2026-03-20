@@ -6,6 +6,7 @@ import { spacing, layout, rh, rw } from '../../../utils';
 import { SearchBar } from '../../../components';
 import { IconName } from '../../../types/icon';
 import { useNavigation } from '@react-navigation/native';
+import { AppStackNavigationProp } from '../../../types/navigation';
 
 type HeaderIconButtonProps = {
   icon: IconName;
@@ -25,7 +26,7 @@ const HeaderIconButton = ({ icon, onPress }: HeaderIconButtonProps) => {
 };
 
 const HomeHeader = () => {
-  const navigation = useNavigation();
+  const navigation = useNavigation<AppStackNavigationProp<'Search'>>();
 
   return (
     <View style={[styles.container, layout.spaceBetweenRow]}>
