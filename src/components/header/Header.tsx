@@ -12,7 +12,9 @@ type HeaderProps = {
   onLeftPress?: () => void;
   onRightPress?: () => void;
   showSearch?: boolean;
-  onSearchPress?: () => void;
+  searchValue?: string;
+  onSearchChangeText?: (text: string) => void;
+  onSearchSubmit?: () => void;
 };
 
 type HeaderActionButtonProps = {
@@ -45,7 +47,9 @@ export const Header = ({
   onLeftPress,
   onRightPress,
   showSearch = true,
-  onSearchPress,
+  searchValue,
+  onSearchChangeText,
+  onSearchSubmit,
 }: HeaderProps) => {
   return (
     <View style={[styles.container, layout.spaceBetweenRow]}>
@@ -57,7 +61,14 @@ export const Header = ({
       )}
 
       {/* Search*/}
-      {showSearch && <SearchBar mode="input" onPress={onSearchPress} />}
+      {showSearch && (
+        <SearchBar
+          mode="input"
+          value={searchValue}
+          onChangeText={onSearchChangeText}
+          onSubmit={onSearchSubmit}
+        />
+      )}
 
       {/* Right Icon*/}
       {rightIcon && (
