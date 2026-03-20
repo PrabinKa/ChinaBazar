@@ -1,16 +1,9 @@
 import React from 'react';
-import {
-  View,
-  Text,
-  Image,
-  StyleSheet,
-  ScrollView,
-  TouchableOpacity,
-} from 'react-native';
+import { View, Text, Image, StyleSheet, ScrollView } from 'react-native';
 import { CATEGORIES, TCategory } from '../../../constants/data/categories';
-import { layout, rf, rh, rw, spacing } from '../../../utils';
+import { rf, rh, rw, spacing } from '../../../utils';
 import { colors, radius, shadow } from '../../../theme';
-import Ionicons from '@react-native-vector-icons/ionicons';
+import { SectionHeader } from '../../../components';
 
 const CategoriesList: React.FC = () => {
   const renderCategoryItem = (item: TCategory) => {
@@ -30,13 +23,11 @@ const CategoriesList: React.FC = () => {
 
   return (
     <View style={styles.container}>
-      <View style={[styles.header, layout.spaceBetweenRow]}>
-        <Text style={styles.title}>Categories</Text>
-        <TouchableOpacity activeOpacity={0.7} style={[layout.spaceAroundRow]} onPress={() => {}}>
-          <Text style={styles.viewAllButton}>View All</Text>
-          <Ionicons name="chevron-forward" size={22} color={colors.highlight} />
-        </TouchableOpacity>
-      </View>
+      <SectionHeader
+        title="Categories"
+        onViewAllPress={() => {}}
+        containerStyle={styles.header}
+      />
       <ScrollView
         horizontal
         showsHorizontalScrollIndicator={false}
@@ -52,21 +43,11 @@ export default CategoriesList;
 
 const styles = StyleSheet.create({
   container: {
-    marginTop: spacing(20)
+    marginTop: spacing(20),
   },
   header: {
     marginBottom: spacing(16),
-    paddingHorizontal: spacing(16)
-  },
-  title: {
-    fontSize: rf(18),
-    fontWeight: '700',
-    color: colors.textPrimary,
-  },
-  viewAllButton: {
-    fontSize: rf(14),
-    fontWeight: '600',
-    color: colors.highlight,
+    paddingHorizontal: spacing(16),
   },
   scrollContent: {
     paddingHorizontal: spacing(16),

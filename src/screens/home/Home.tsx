@@ -6,6 +6,7 @@ import HomeHeader from './components/HomeHeader';
 import BannerCarousel from './components/BannerCarousel';
 import CategoriesList from './components/CategoriesList';
 import MoreDealsSection from './components/MoreDealsSection';
+import TodaysDeals from './components/TodaysDeals';
 import { Banner, BANNERS } from '../../constants';
 
 const Home = () => {
@@ -29,6 +30,7 @@ const Home = () => {
         <BannerCarousel data={BANNERS} renderItem={carouselRenderItem} />
         <CategoriesList />
         <MoreDealsSection />
+        <TodaysDeals />
       </ScrollView>
     </SafeAreaView>
   );

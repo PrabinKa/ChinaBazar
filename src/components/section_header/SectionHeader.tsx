@@ -18,7 +18,7 @@ export interface SectionHeaderProps {
   viewAllColor?: string;
 }
 
-const SectionHeader: React.FC<SectionHeaderProps> = ({
+export const SectionHeader: React.FC<SectionHeaderProps> = ({
   title,
   onViewAllPress,
   containerStyle,
@@ -43,8 +43,6 @@ const SectionHeader: React.FC<SectionHeaderProps> = ({
     </View>
   );
 };
-
-export default SectionHeader;
 
 const styles = StyleSheet.create({
   container: {
