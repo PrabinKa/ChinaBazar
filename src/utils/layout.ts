@@ -25,6 +25,10 @@ export const layout = {
     justifyContent: 'space-around',
     alignItems: 'center',
   },
+  rowSpaceBetween: {
+    flexDirection: 'row',
+    justifyContent: 'space-between'
+  },
   fill: { flex: 1 },
   fillCenter: { flex: 1, justifyContent: 'center', alignItems: 'center' },
 } satisfies Record<string, ViewStyle>;

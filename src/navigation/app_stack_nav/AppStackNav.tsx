@@ -1,6 +1,7 @@
 import React from 'react';
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
 import BottomTabNav from '../bottom_tab_nav/BottomTabNav';
+import SearchScreen from '../../screens/search/SearchScreen';
 
 const Stack = createNativeStackNavigator();
 
@@ -16,6 +17,7 @@ const AppStackNav = () => {
       }}
     >
       <Stack.Screen name="HomeTab" component={BottomTabNav} />
+      <Stack.Screen name="Search" component={SearchScreen} />
     </Stack.Navigator>
   );
 };

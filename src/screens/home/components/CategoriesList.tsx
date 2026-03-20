@@ -1,11 +1,15 @@
 import React from 'react';
 import { View, Text, Image, StyleSheet, ScrollView } from 'react-native';
-import { CATEGORIES, TCategory } from '../../../constants/data/categories';
+import { TCategory } from '../../../constants/data/categories';
 import { rf, rh, rw, spacing } from '../../../utils';
 import { colors, radius, shadow } from '../../../theme';
 import { SectionHeader } from '../../../components';
 
-const CategoriesList: React.FC = () => {
+type Props = {
+  categories?: TCategory[];
+};
+
+const CategoriesList: React.FC<Props> = ({ categories = [] }) => {
   const renderCategoryItem = (item: TCategory) => {
     return (
       <View key={item.id} style={styles.categoryItem}>
@@ -33,7 +37,7 @@ const CategoriesList: React.FC = () => {
         showsHorizontalScrollIndicator={false}
         contentContainerStyle={styles.scrollContent}
       >
-        {CATEGORIES.map(renderCategoryItem)}
+        {categories.map(renderCategoryItem)}
       </ScrollView>
     </View>
   );

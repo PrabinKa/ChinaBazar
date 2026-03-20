@@ -1,11 +1,15 @@
 import React from 'react';
 import { View, Image, StyleSheet, ScrollView } from 'react-native';
-import { MORE_DEALS, TMoreDeals } from '../../../constants/data/moredeals';
+import { TMoreDeals } from '../../../constants/data/moredeals';
 import { rh, rw, spacing } from '../../../utils';
 import { colors, radius, shadow } from '../../../theme';
 import { SectionHeader } from '../../../components';
 
-const MoreDealsSection: React.FC = () => {
+type Props = {
+  deals?: TMoreDeals[];
+};
+
+const MoreDealsSection: React.FC<Props> = ({ deals = [] }) => {
   const renderDealItem = (item: TMoreDeals) => {
     return (
       <View key={item.id} style={styles.dealItem}>
@@ -30,7 +34,7 @@ const MoreDealsSection: React.FC = () => {
         showsHorizontalScrollIndicator={false}
         contentContainerStyle={styles.scrollContent}
       >
-        {MORE_DEALS.map(renderDealItem)}
+        {deals.map(renderDealItem)}
       </ScrollView>
     </View>
   );

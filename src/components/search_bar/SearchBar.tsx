@@ -1,36 +1,68 @@
 import React from 'react';
-import { Pressable, StyleSheet, Text, View } from 'react-native';
+import {
+  Pressable,
+  StyleSheet,
+  Text,
+  View,
+  TextInput,
+} from 'react-native';
 import Ionicons from '@react-native-vector-icons/ionicons';
 import { layout, rh, spacing } from '../../utils';
 import { colors, radius } from '../../theme';
 
 type Props = {
+  mode?: 'button' | 'input';
   placeholder?: string;
+  value?: string;
+  onChangeText?: (text: string) => void;
   onPress?: () => void;
+  onSubmit?: () => void;
 };
 
 export const SearchBar = ({
+  mode = 'button',
   placeholder = 'Search for products...',
+  value,
+  onChangeText,
   onPress,
+  onSubmit,
 }: Props) => {
+  const isButton = mode === 'button';
+
+  const Container = isButton ? Pressable : View;
+
   return (
-    <Pressable
-      onPress={onPress}
+    <Container
+      {...(isButton && { onPress })}
       style={[styles.container, layout.spaceBetweenRow]}
     >
-      <View style={[layout.centerRow]}>
+      <View style={layout.centerRow}>
         <Ionicons
           name="search-outline"
           size={18}
           color={colors.textSecondary}
         />
-        <Text style={styles.placeholder}>{placeholder}</Text>
+
+        {isButton ? (
+          <Text style={styles.placeholder}>{placeholder}</Text>
+        ) : (
+          <TextInput
+            value={value}
+            onChangeText={onChangeText}
+            placeholder={placeholder}
+            placeholderTextColor={colors.textSecondary}
+            style={styles.input}
+            returnKeyType="search"
+            onSubmitEditing={onSubmit}
+          />
+        )}
       </View>
 
-      <View style={[styles.button, layout.center]}>
+      {/* Right Button */}
+      <Pressable style={[styles.button, layout.center]} onPress={onSubmit}>
         <Text style={styles.buttonText}>Search</Text>
-      </View>
-    </Pressable>
+      </Pressable>
+    </Container>
   );
 };
 
@@ -44,17 +76,21 @@ const styles = StyleSheet.create({
     borderRadius: radius.full,
     marginHorizontal: spacing(5),
     borderColor: colors.primary,
-    borderWidth: 1.5
+    borderWidth: 1.5,
   },
   placeholder: {
     marginLeft: spacing(8),
     color: colors.textSecondary,
   },
+  input: {
+    marginLeft: spacing(8),
+    flex: 1,
+    color: colors.textPrimary,
+  },
   button: {
     backgroundColor: colors.primary,
     height: rh(40),
     paddingHorizontal: spacing(14),
-    paddingVertical: spacing(4),
     borderRadius: radius.full,
   },
   buttonText: {

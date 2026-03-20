@@ -1,21 +1,19 @@
 import React from 'react';
-import {
-  View,
-  StyleSheet,
-  ScrollView,
-  Dimensions,
-} from 'react-native';
+import { View, StyleSheet, ScrollView, Dimensions } from 'react-native';
 import { colors, radius } from '../../../theme';
 import { rf, spacing } from '../../../utils';
 import { ProductCard, SectionHeader } from '../../../components';
-import { PRODUCTS } from '../../../constants/data/products';
+import { Product } from '../../../constants/data/products';
 
 const { width: SCREEN_WIDTH } = Dimensions.get('window');
 const CARD_WIDTH = SCREEN_WIDTH * 0.38;
 const IMAGE_HEIGHT = CARD_WIDTH * 0.8;
 
-const TodaysDeals = ({
-}) => {
+type Props = {
+  products?: Product[];
+};
+
+const TodaysDeals: React.FC<Props> = ({ products = [] }) => {
   return (
     <View style={styles.container}>
       <SectionHeader
@@ -28,8 +26,10 @@ const TodaysDeals = ({
         showsHorizontalScrollIndicator={false}
         contentContainerStyle={styles.scrollContent}
       >
-        {PRODUCTS.map(product => (
-          <ProductCard key={product.id} product={product} />
+        {products.map(product => (
+          <React.Fragment key={product.id}>
+            <ProductCard product={product} />
+          </React.Fragment>
         ))}
       </ScrollView>
     </View>

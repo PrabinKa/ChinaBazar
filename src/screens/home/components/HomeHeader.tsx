@@ -5,6 +5,7 @@ import { colors, radius } from '../../../theme';
 import { spacing, layout, rh, rw } from '../../../utils';
 import { SearchBar } from '../../../components';
 import { IconName } from '../../../types/icon';
+import { useNavigation } from '@react-navigation/native';
 
 type HeaderIconButtonProps = {
   icon: IconName;
@@ -24,10 +25,12 @@ const HeaderIconButton = ({ icon, onPress }: HeaderIconButtonProps) => {
 };
 
 const HomeHeader = () => {
+  const navigation = useNavigation();
+
   return (
     <View style={[styles.container, layout.spaceBetweenRow]}>
       <HeaderIconButton icon="heart-outline" onPress={() => {}} />
-      <SearchBar onPress={() => {}} />
+      <SearchBar mode='button' onPress={() => {navigation.navigate('Search')}} />
       <HeaderIconButton icon="notifications-outline" onPress={() => {}} />
     </View>
   );
