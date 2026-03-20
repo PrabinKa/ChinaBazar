@@ -5,6 +5,7 @@ import { COLORS } from '../../theme/colors';
 import HomeHeader from './components/HomeHeader';
 import BannerCarousel from './components/BannerCarousel';
 import CategoriesList from './components/CategoriesList';
+import MoreDealsSection from './components/MoreDealsSection';
 import { Banner, BANNERS } from '../../constants';
 
 const Home = () => {
@@ -27,6 +28,7 @@ const Home = () => {
         <HomeHeader />
         <BannerCarousel data={BANNERS} renderItem={carouselRenderItem} />
         <CategoriesList />
+        <MoreDealsSection />
       </ScrollView>
     </SafeAreaView>
   );
