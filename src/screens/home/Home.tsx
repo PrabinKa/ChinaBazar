@@ -1,9 +1,10 @@
 import React, { useCallback } from 'react';
-import { Image, StyleSheet } from 'react-native';
+import { Image, ScrollView, StyleSheet } from 'react-native';
 import { SafeAreaView } from 'react-native-safe-area-context';
 import { COLORS } from '../../theme/colors';
 import HomeHeader from './components/HomeHeader';
 import BannerCarousel from './components/BannerCarousel';
+import CategoriesList from './components/CategoriesList';
 import { Banner, BANNERS } from '../../constants';
 
 const Home = () => {
@@ -22,8 +23,11 @@ const Home = () => {
 
   return (
     <SafeAreaView style={styles.container}>
-      <HomeHeader />
-      <BannerCarousel data={BANNERS} renderItem={carouselRenderItem} />
+      <ScrollView showsVerticalScrollIndicator={false}>
+        <HomeHeader />
+        <BannerCarousel data={BANNERS} renderItem={carouselRenderItem} />
+        <CategoriesList />
+      </ScrollView>
     </SafeAreaView>
   );
 };
