@@ -14,13 +14,15 @@ import Ionicons from '@react-native-vector-icons/ionicons';
 interface ProductCardProp {
   key?: string;
   product: Product;
+  cardWidth?: number;
 }
 
 const { width: SCREEN_WIDTH } = Dimensions.get('window');
-const CARD_WIDTH = SCREEN_WIDTH * 0.38;
-const IMAGE_HEIGHT = CARD_WIDTH * 0.8;
+const DEFAULT_CARD_WIDTH = SCREEN_WIDTH * 0.38;
 
-export const ProductCard: React.FC<ProductCardProp> = ({ key, product }) => {
+export const ProductCard: React.FC<ProductCardProp> = ({ key, product, cardWidth }) => {
+  const effectiveCardWidth = cardWidth ?? DEFAULT_CARD_WIDTH;
+  const imageHeight = effectiveCardWidth * 0.8;
 
   // Format price with comma separator
   const formatPrice = (price: number) => {
@@ -31,9 +33,9 @@ export const ProductCard: React.FC<ProductCardProp> = ({ key, product }) => {
     <TouchableOpacity
       key={key}
       activeOpacity={0.9}
-      style={[styles.cardContainer]}
+      style={[styles.cardContainer, { width: effectiveCardWidth }]}
     >
-      <View style={[styles.imageContainer, { borderRadius: radius.lg }]}>
+      <View style={[styles.imageContainer, { borderRadius: radius.lg, width: effectiveCardWidth, height: imageHeight }]}>
         <View style={styles.badgeContainer}>
           {product.isNew && (
             <View
@@ -100,7 +102,6 @@ const styles = StyleSheet.create({
     gap: spacing(12),
   },
   cardContainer: {
-    width: CARD_WIDTH,
     backgroundColor: colors.surface,
     borderRadius: radius.lg,
     overflow: 'hidden',
@@ -108,8 +109,6 @@ const styles = StyleSheet.create({
   },
   imageContainer: {
     position: 'relative',
-    width: CARD_WIDTH,
-    height: IMAGE_HEIGHT,
     backgroundColor: colors.surfaceVariant,
   },
   badgeContainer: {

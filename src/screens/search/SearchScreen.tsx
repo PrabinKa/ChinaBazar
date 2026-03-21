@@ -27,6 +27,8 @@ import { IconName } from '../../types/icon';
 
 const { width: SCREEN_WIDTH } = Dimensions.get('window');
 const CARD_MARGIN = spacing(10);
+const HORIZONTAL_PADDING = spacing(15);
+const COLUMN_WIDTH = (SCREEN_WIDTH - HORIZONTAL_PADDING * 2 - CARD_MARGIN) / 2;
 
 interface SearchScreenProps {
   navigation: AppStackNavigationProp<'Search'>;
@@ -147,7 +149,7 @@ const SearchScreen: React.FC<SearchScreenProps> = ({ navigation }) => {
             : { marginLeft: CARD_MARGIN / 2 },
         ]}
       >
-        <ProductCard product={item} />
+        <ProductCard product={item} cardWidth={COLUMN_WIDTH} />
       </View>
     );
   };
