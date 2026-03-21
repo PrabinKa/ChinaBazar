@@ -15,9 +15,13 @@ export const COLORS = {
 
   // Accent / Highlights
   accent: '#FF8700',
+  accentLight: '#FFF3E0',
   highlight: '#FFE497',
   rating: '#FFC211',
+  success: '#22C55E',
 
   // Neutral
   border: '#E9E9E9',
+  borderDark: '#CCCCCC',
+  overlay: 'rgba(0,0,0,0.4)',
 };
