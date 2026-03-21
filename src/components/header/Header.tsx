@@ -82,6 +82,7 @@ const styles = StyleSheet.create({
   container: {
     backgroundColor: colors.background,
     paddingHorizontal: spacing(15),
+    marginVertical: spacing(10)
   },
   iconButton: {
     height: rh(48),
