@@ -9,11 +9,12 @@ const { width: SCREEN_WIDTH } = Dimensions.get('window');
 const CARD_WIDTH = SCREEN_WIDTH * 0.38;
 const IMAGE_HEIGHT = CARD_WIDTH * 0.8;
 
-type Props = {
+interface TodaysDealsProps {
   products?: Product[];
-};
+}
 
-const TodaysDeals: React.FC<Props> = ({ products = [] }) => {
+const TodaysDeals: React.FC<TodaysDealsProps> = ({ products = [] }) => {
+
   return (
     <View style={styles.container}>
       <SectionHeader

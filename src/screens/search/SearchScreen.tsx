@@ -207,6 +207,7 @@ const SearchScreen: React.FC<SearchScreenProps> = ({ navigation }) => {
         leftIcon="chevron-back"
         rightIcon="cart-outline"
         onLeftPress={() => navigation.goBack()}
+        onRightPress={() => {}}
         searchValue={searchText}
         onSearchChangeText={handleSearchChange}
         onSearchSubmit={handleSearch}

@@ -19,6 +19,7 @@ export type BottomTabParamList = {
 export type AppStackParamList = {
   HomeTab: undefined;
   Search: undefined;
+  ProductDetails: { productId: string }
 };
 
 /**

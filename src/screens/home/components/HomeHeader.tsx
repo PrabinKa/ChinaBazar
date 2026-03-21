@@ -31,7 +31,12 @@ const HomeHeader = () => {
   return (
     <View style={[styles.container, layout.spaceBetweenRow]}>
       <HeaderIconButton icon="heart-outline" onPress={() => {}} />
-      <SearchBar mode='button' onPress={() => {navigation.navigate('Search')}} />
+      <SearchBar
+        mode="button"
+        onPress={() => {
+          navigation.navigate('Search');
+        }}
+      />
       <HeaderIconButton icon="notifications-outline" onPress={() => {}} />
     </View>
   );
@@ -43,6 +48,7 @@ const styles = StyleSheet.create({
   container: {
     backgroundColor: colors.background,
     paddingHorizontal: spacing(15),
+    marginVertical: spacing(10),
   },
   iconButton: {
     height: rh(48),

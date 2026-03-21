@@ -3,18 +3,27 @@
 import { ViewStyle } from 'react-native';
 
 export const layout = {
-  center: { justifyContent: 'center', alignItems: 'center' },
+  center: { 
+    justifyContent: 'center', 
+    alignItems: 'center' 
+  },
   centerRow: {
     flexDirection: 'row',
     justifyContent: 'center',
     alignItems: 'center',
+  },
+  flexRowCenter: {
+    flexDirection: 'row',
+    justifyContent: 'center'
   },
   centerColumn: {
     flexDirection: 'column',
     justifyContent: 'center',
     alignItems: 'center',
   },
-  spaceBetween: { justifyContent: 'space-between' },
+  spaceBetween: { 
+    justifyContent: 'space-between' 
+  },
   spaceBetweenRow: {
     flexDirection: 'row',
     justifyContent: 'space-between',
@@ -29,6 +38,12 @@ export const layout = {
     flexDirection: 'row',
     justifyContent: 'space-between'
   },
-  fill: { flex: 1 },
-  fillCenter: { flex: 1, justifyContent: 'center', alignItems: 'center' },
+  fill: { 
+    flex: 1 
+  },
+  fillCenter: { 
+    flex: 1, 
+    justifyContent: 'center', 
+    alignItems: 'center' 
+  },
 } satisfies Record<string, ViewStyle>;

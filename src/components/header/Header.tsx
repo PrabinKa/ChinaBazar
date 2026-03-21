@@ -7,14 +7,17 @@ import { colors, radius } from '../../theme';
 import { SearchBar } from '../search_bar/SearchBar';
 
 type HeaderProps = {
-  leftIcon?: IconName;
-  rightIcon?: IconName;
-  onLeftPress?: () => void;
-  onRightPress?: () => void;
+  leftIcon: IconName;
+  rightIcon: IconName;
+  onLeftPress: () => void;
+  onRightPress: () => void;
+  searchMode?: 'button' | 'input';
   showSearch?: boolean;
   searchValue?: string;
   onSearchChangeText?: (text: string) => void;
   onSearchSubmit?: () => void;
+  onSearchPressed?: () => void;
+  placeholder?: string;
 };
 
 type HeaderActionButtonProps = {
@@ -46,10 +49,13 @@ export const Header = ({
   rightIcon,
   onLeftPress,
   onRightPress,
+  searchMode,
   showSearch = true,
   searchValue,
   onSearchChangeText,
   onSearchSubmit,
+  onSearchPressed,
+  placeholder
 }: HeaderProps) => {
   return (
     <View style={[styles.container, layout.spaceBetweenRow]}>
@@ -63,10 +69,12 @@ export const Header = ({
       {/* Search*/}
       {showSearch && (
         <SearchBar
-          mode="input"
+          mode={searchMode ?? "input"}
           value={searchValue}
           onChangeText={onSearchChangeText}
           onSubmit={onSearchSubmit}
+          onPress={onSearchPressed}
+          placeholder={placeholder}
         />
       )}
 

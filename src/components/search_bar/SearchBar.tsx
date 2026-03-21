@@ -1,11 +1,5 @@
 import React from 'react';
-import {
-  Pressable,
-  StyleSheet,
-  Text,
-  View,
-  TextInput,
-} from 'react-native';
+import { Pressable, StyleSheet, Text, View, TextInput } from 'react-native';
 import Ionicons from '@react-native-vector-icons/ionicons';
 import { layout, rh, spacing } from '../../utils';
 import { colors, radius } from '../../theme';
@@ -36,7 +30,16 @@ export const SearchBar = ({
       {...(isButton && { onPress })}
       style={[styles.container, layout.spaceBetweenRow]}
     >
-      <View style={[layout.centerRow, {flex: 1}]}>
+      <View
+        style={[
+          {
+            flex: 1,
+            flexDirection: 'row',
+            alignItems: 'center',
+            paddingLeft: spacing(12),
+          },
+        ]}
+      >
         <Ionicons
           name="search-outline"
           size={18}
@@ -71,7 +74,6 @@ const styles = StyleSheet.create({
     flex: 1,
     height: rh(48),
     backgroundColor: colors.background,
-    paddingLeft: spacing(12),
     paddingRight: spacing(5),
     borderRadius: radius.full,
     marginHorizontal: spacing(5),

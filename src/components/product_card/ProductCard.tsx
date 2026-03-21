@@ -10,6 +10,8 @@ import { Product } from '../../constants/data/products';
 import { colors, radius } from '../../theme';
 import { rf, spacing } from '../../utils';
 import Ionicons from '@react-native-vector-icons/ionicons';
+import { useNavigation } from '@react-navigation/native';
+import { AppStackNavigationProp } from '../../types/navigation';
 
 interface ProductCardProp {
   key?: string;
@@ -20,7 +22,13 @@ interface ProductCardProp {
 const { width: SCREEN_WIDTH } = Dimensions.get('window');
 const DEFAULT_CARD_WIDTH = SCREEN_WIDTH * 0.38;
 
-export const ProductCard: React.FC<ProductCardProp> = ({ key, product, cardWidth }) => {
+export const ProductCard: React.FC<ProductCardProp> = ({
+  key,
+  product,
+  cardWidth,
+}) => {
+  const navigation = useNavigation<AppStackNavigationProp<'ProductDetails'>>();
+
   const effectiveCardWidth = cardWidth ?? DEFAULT_CARD_WIDTH;
   const imageHeight = effectiveCardWidth * 0.8;
 
@@ -33,9 +41,19 @@ export const ProductCard: React.FC<ProductCardProp> = ({ key, product, cardWidth
     <TouchableOpacity
       key={key}
       activeOpacity={0.9}
+      onPress={() => navigation.navigate('ProductDetails', {productId: product.id})}
       style={[styles.cardContainer, { width: effectiveCardWidth }]}
     >
-      <View style={[styles.imageContainer, { borderRadius: radius.lg, width: effectiveCardWidth, height: imageHeight }]}>
+      <View
+        style={[
+          styles.imageContainer,
+          {
+            borderRadius: radius.lg,
+            width: effectiveCardWidth,
+            height: imageHeight,
+          },
+        ]}
+      >
         <View style={styles.badgeContainer}>
           {product.isNew && (
             <View
