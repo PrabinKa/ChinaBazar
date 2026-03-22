@@ -1,7 +1,13 @@
 import React from 'react';
-import { StyleSheet, Text, TouchableOpacity, View } from 'react-native';
+import {
+  ScrollView,
+  StyleSheet,
+  Text,
+  TouchableOpacity,
+  View,
+} from 'react-native';
 import { colors, radius } from '../../../theme';
-import { rf, rw, spacing } from '../../../utils';
+import { layout, rw, spacing } from '../../../utils';
 
 interface ProductVariantsProps {
   colors: string[];
@@ -23,24 +29,33 @@ const ProductVariants: React.FC<ProductVariantsProps> = ({
   return (
     <View style={styles.container}>
       {/* Color Selection */}
-      <Text style={styles.sectionTitle}>Color</Text>
+      <Text style={styles.sectionTitle}>Color :</Text>
       <View style={styles.row}>
-        {colorOptions.map((color, index) => (
-          <TouchableOpacity
-            key={index}
-            onPress={() => onColorSelect(index)}
-            style={[
-              styles.colorCircle,
-              { backgroundColor: color },
-              index === selectedColorIndex && styles.selectedBorder,
-            ]}
-          />
-        ))}
+        {colorOptions.map((color, index) => {
+          const isSelected = index === selectedColorIndex;
+
+          return (
+            <TouchableOpacity
+              key={index}
+              onPress={() => onColorSelect(index)}
+              style={[
+                styles.colorWrapper,
+                isSelected && styles.selectedWrapper,
+              ]}
+            >
+              <View style={[styles.colorCircle, { backgroundColor: color }]} />
+            </TouchableOpacity>
+          );
+        })}
       </View>
 
       {/* Storage Selection */}
-      <Text style={styles.sectionTitle}>Storage</Text>
-      <View style={styles.rowWrap}>
+      <Text style={styles.sectionTitle}>Storage :</Text>
+      <ScrollView
+        horizontal
+        showsHorizontalScrollIndicator={false}
+        contentContainerStyle={[layout.rowAlignCenter]}
+      >
         {storage.map((option, index) => (
           <TouchableOpacity
             key={index}
@@ -60,7 +75,7 @@ const ProductVariants: React.FC<ProductVariantsProps> = ({
             </Text>
           </TouchableOpacity>
         ))}
-      </View>
+      </ScrollView>
     </View>
   );
 };
@@ -75,26 +90,29 @@ const styles = StyleSheet.create({
   sectionTitle: {
     marginBottom: spacing(6),
     fontWeight: '600',
-    color: colors.textPrimary,
+    color: colors.textSecondary,
   },
   row: {
-    flexDirection: 'row',
-    alignItems: 'center',
+    ...layout.rowAlignCenter,
     marginBottom: spacing(16),
   },
   rowWrap: {
     flexDirection: 'row',
     flexWrap: 'wrap',
   },
+  colorWrapper: {
+    padding: spacing(3),
+    borderRadius: 40,
+    marginRight: spacing(10),
+  },
+  selectedWrapper: {
+    borderWidth: 2,
+    borderColor: colors.primary,
+  },
   colorCircle: {
     width: rw(32),
     height: rw(32),
     borderRadius: 16,
-    marginRight: spacing(10),
-  },
-  selectedBorder: {
-    borderWidth: 2,
-    borderColor: colors.primary,
   },
   storageBox: {
     paddingVertical: spacing(8),
