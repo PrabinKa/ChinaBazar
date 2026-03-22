@@ -5,6 +5,8 @@ import ProductInfo from '../components/ProductInfo';
 import ProductVariants from '../components/ProductVariants';
 import ProductDetailsSection from '../components/ProductDetailsSection';
 import ProductReviews from '../components/ProductReviews';
+import MediaGallery from '../components/MediaGallery';
+import ReviewCards from '../components/ReviewCards';
 import { Header } from '../../../components';
 import { AppStackNavigationProp } from '../../../types/navigation';
 
@@ -14,8 +16,10 @@ export type ProductDetailsSectionType =
   | 'image_carousel'
   | 'product_info'
   | 'product_variants'
+  | 'product_details'
   | 'product_reviews'
-  | 'product_details';
+  | 'media_gallery'
+  | 'review_cards';
 
 export interface ProductDetailsSectionItem {
   id: string;
@@ -205,6 +209,16 @@ const useProductDetailsSections = ({
           starBreakdown,
         } as ProductReviewsData,
       },
+      {
+        id: 'media_gallery',
+        type: 'media_gallery',
+        data: {},
+      },
+      {
+        id: 'review_cards',
+        type: 'review_cards',
+        data: {},
+      },
     ];
   }, [
     images,
@@ -296,6 +310,12 @@ const useProductDetailsSections = ({
               onViewAll={data.onViewAll}
             />
           );
+        }
+        case 'media_gallery': {
+          return <MediaGallery />;
+        }
+        case 'review_cards': {
+          return <ReviewCards />;
         }
         default:
           return <></>;
