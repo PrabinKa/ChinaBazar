@@ -50,6 +50,15 @@ export interface ProductDetailsData {
   shippingFee: number;
   highlights: string[];
   description: string;
+  specifications?: {
+    brand?: string;
+    model?: string;
+    color?: string;
+    ram?: string;
+    storage?: string;
+    fastCharging?: string;
+  };
+  disclaimer?: string;
 }
 
 interface UseProductDetailsSectionsProps {
@@ -80,6 +89,7 @@ const useProductDetailsSections = ({
     images = [],
     description = '',
     highlights = [],
+    specifications,
     location = 'Kathmandu',
     shippingFee = 0,
     variants = [],
@@ -155,6 +165,7 @@ const useProductDetailsSections = ({
           shippingFee,
           highlights,
           description,
+          specifications,
         } as ProductDetailsData,
       },
     ];
@@ -174,6 +185,7 @@ const useProductDetailsSections = ({
     shippingFee,
     highlights,
     description,
+    specifications,
   ]);
 
   const renderSectionItem = useCallback(
@@ -231,6 +243,8 @@ const useProductDetailsSections = ({
               shippingFee={data.shippingFee}
               highlights={data.highlights}
               description={data.description}
+              specifications={data.specifications}
+              disclaimer={data.disclaimer}
             />
           );
         }

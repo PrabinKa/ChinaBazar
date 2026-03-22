@@ -16,6 +16,15 @@ interface ProductDetailsSectionProps {
   shippingFee: number;
   highlights: string[];
   description: string;
+  specifications?: {
+    brand?: string;
+    model?: string;
+    color?: string;
+    ram?: string;
+    storage?: string;
+    fastCharging?: string;
+  };
+  disclaimer?: string;
 }
 
 const CollapsibleSection = ({
@@ -103,6 +112,8 @@ const ProductDetailsSection: React.FC<ProductDetailsSectionProps> = ({
   shippingFee,
   highlights,
   description,
+  specifications,
+  disclaimer,
 }) => {
   const [showHighlights, setShowHighlights] = React.useState(true);
   const [showDetails, setShowDetails] = React.useState(false);
@@ -201,18 +212,59 @@ const ProductDetailsSection: React.FC<ProductDetailsSectionProps> = ({
             isOpen={showDetails}
             onToggle={() => setShowDetails(prev => !prev)}
           >
-            <View>
-              <Text style={{ fontSize: rf(14) }}>Description</Text>
+            <View style={styles.descriptionSection}>
+              <Text style={styles.sectionSubTitle}>Description</Text>
               <Text style={styles.description}>{description}</Text>
             </View>
-            <View>
-              <Text>Specifications</Text>
-              <Text>{}</Text>
-            </View>
-            <View>
-              <Text>Disclaimer</Text>
-              <Text>{}</Text>
-            </View>
+
+            {/* Specifications Table */}
+            {specifications && Object.keys(specifications).length > 0 && (
+              <View style={styles.specificationsSection}>
+                <Text style={styles.sectionSubTitle}>Specifications</Text>
+                <View style={styles.specsTable}>
+                  {[
+                    { label: 'Brand', value: specifications.brand },
+                    { label: 'Model ID', value: specifications.model },
+                    { label: 'Color', value: specifications.color },
+                    { label: 'RAM', value: specifications.ram },
+                    { label: 'Storage', value: specifications.storage },
+                    {
+                      label: 'Fast Charging',
+                      value: specifications.fastCharging,
+                    },
+                  ]
+                    .filter(row => !!row.value)
+                    .map((row, index, arr) => (
+                      <View
+                        key={row.label}
+                        style={[
+                          styles.specsRow,
+                          index % 2 === 1 && styles.specsRowAlt,
+                          index === arr.length - 1 && { borderBottomWidth: 0 },
+                        ]}
+                      >
+                        <View style={styles.specsLabel}>
+                          <Text style={styles.specsLabelText}>{row.label}</Text>
+                        </View>
+                        <View style={styles.specsValue}>
+                          <Text style={styles.specsValueText}>{row.value}</Text>
+                        </View>
+                      </View>
+                    ))}
+                </View>
+              </View>
+            )}
+
+            {/* Disclaimer */}
+            { (
+              <View style={styles.disclaimerSection}>
+                <Text style={styles.sectionSubTitle}>Disclaimer</Text>
+                <Text style={styles.disclaimerText}>
+                  {disclaimer ??
+                    'Specifications and availability may vary by region. Prices are subject to change.'}
+                </Text>
+              </View>
+            )}
           </CollapsibleSection>
         )}
       </View>
@@ -279,6 +331,63 @@ const styles = StyleSheet.create({
     lineHeight: 22,
     fontSize: rf(13),
     flexWrap: 'wrap',
+  },
+  descriptionSection: {
+    marginBottom: spacing(16),
+  },
+  sectionSubTitle: {
+    fontSize: rf(14),
+    fontWeight: '600',
+    color: colors.textPrimary,
+    marginBottom: spacing(8),
+  },
+  specificationsSection: {
+    marginBottom: spacing(16),
+  },
+  // Replace these styles:
+  specsTable: {
+    borderRadius: 8,
+    overflow: 'hidden',
+  },
+  specsRow: {
+    flexDirection: 'row',
+    borderBottomWidth: StyleSheet.hairlineWidth,
+    borderBottomColor: colors.border,
+  },
+  specsRowAlt: {
+    backgroundColor: colors.surface,
+  },
+  specsLabel: {
+    flex: 1,
+    paddingVertical: spacing(10),
+    paddingHorizontal: spacing(12),
+    backgroundColor: colors.surfaceVariant,
+  },
+  specsLabelText: {
+    fontSize: rf(13),
+    color: colors.textSecondary,
+    fontWeight: '400',
+  },
+  specsValue: {
+    flex: 1.5,
+    paddingVertical: spacing(10),
+    paddingHorizontal: spacing(12),
+  },
+  specsValueText: {
+    fontSize: rf(13),
+    color: colors.textPrimary,
+    fontWeight: '400',
+  },
+  disclaimerSection: {
+    marginBottom: spacing(16),
+  },
+  disclaimerHeader: {
+    marginBottom: spacing(6),
+  },
+  disclaimerText: {
+    fontSize: rf(13),
+    color: colors.textSecondary,
+    lineHeight: 20,
   },
   sectionHeaderRow: {
     ...layout.rowSpaceBetween,
