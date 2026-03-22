@@ -1,5 +1,5 @@
 import { useMemo, useCallback } from 'react';
-import { Image } from 'react-native';
+import { Image, View } from 'react-native';
 import { Banner, BANNERS } from '../../../constants/data/banner';
 import { CATEGORIES, TCategory } from '../../../constants/data/categories';
 import { MORE_DEALS, TMoreDeals } from '../../../constants/data/moredeals';
@@ -16,6 +16,10 @@ import {
   TOffersProduct,
 } from '../../../constants/data/offersection';
 import OffersSection from '../components/OffersSection';
+import { TABS, Tab } from '../../../constants/data/tabs';
+import { ProductGrid } from '../components/ProductGrid';
+import { TabBar } from '../components/TabBar';
+import { ProductsWithTabs } from '../components/ProductsWithTabs';
 
 // Section types
 export type SectionType =
@@ -24,7 +28,8 @@ export type SectionType =
   | 'categories'
   | 'more_deals'
   | 'todays_deals'
-  | 'offers_section';
+  | 'offers_section'
+  | 'products_with_tabs';
 
 export interface HomeSectionItem {
   id: string;
@@ -52,6 +57,11 @@ export interface TodaysDealsSectionData {
 export interface OffersSectionData {
   offersData: TOffersProduct[];
   offersGrid: TOffersGrid[];
+}
+
+export interface ProductsWithTabsData {
+  tabs: Tab[];
+  products: Product[];
 }
 
 const useHomeSections = () => {
@@ -107,6 +117,14 @@ const useHomeSections = () => {
           offersData: OFFERS_PRODUCT,
           offersGrid: OFFER_GRID,
         } as OffersSectionData,
+      },
+      {
+        id: 'products_with_tabs',
+        type: 'products_with_tabs',
+        data: {
+          tabs: TABS,
+          products: PRODUCTS,
+        } as ProductsWithTabsData,
       }
     ];
   }, [carouselRenderItem]);
@@ -146,6 +164,15 @@ const useHomeSections = () => {
           <OffersSection
             offersData={offersSectionData.offersData}
             offersGrid={offersSectionData.offersGrid}
+          />
+        );
+      }
+      case 'products_with_tabs': {
+        const tabsData = item.data as ProductsWithTabsData;
+        return (
+          <ProductsWithTabs
+            tabs={tabsData.tabs}
+            products={tabsData.products}
           />
         );
       }
