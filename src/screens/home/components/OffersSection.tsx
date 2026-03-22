@@ -1,6 +1,6 @@
 import React from 'react';
 import { Image, StyleSheet, Text, View } from 'react-native';
-import { layout, rf, rh, rw, spacing } from '../../../utils';
+import { formatPrice, layout, rf, rh, rw, spacing } from '../../../utils';
 import { colors } from '../../../theme';
 import { TOffersGrid, TOffersProduct } from '../../../constants/data/offersection';
 
@@ -14,7 +14,7 @@ const ProductItem = ({ item }: any) => {
     <View style={styles.productItem}>
       <Image source={{ uri: item.image }} style={styles.image} />
       <View style={styles.priceTag}>
-        <Text style={styles.priceText}>NPR {item.price}</Text>
+        <Text style={styles.priceText}>{formatPrice(item.price, 'NPR')}</Text>
       </View>
     </View>
   );
@@ -28,7 +28,7 @@ const OfferCard = ({ item }: any) => {
       <View style={styles.offerContent}>
         <Image source={{ uri: item.image }} style={styles.image} />
         <View style={styles.priceTag}>
-          <Text style={styles.priceText}>NPR {item.price}</Text>
+          <Text style={styles.priceText}>{formatPrice(item.price, 'NPR')}</Text>
         </View>
       </View>
     </View>

@@ -23,7 +23,7 @@ const MoreDealsSection: React.FC<Props> = ({ deals = [] }) => {
   };
 
   return (
-    <View style={styles.container}>
+    <View>
       <SectionHeader
         title="More Deals"
         onViewAllPress={() => {}}
@@ -43,9 +43,6 @@ const MoreDealsSection: React.FC<Props> = ({ deals = [] }) => {
 export default MoreDealsSection;
 
 const styles = StyleSheet.create({
-  container: {
-    marginTop: spacing(20),
-  },
   header: {
     paddingHorizontal: spacing(16),
   },

@@ -23,7 +23,7 @@ const BannerCarousel = <T,>({
   const scrollX = useRef(new Animated.Value(0)).current;
 
   return (
-    <View style={{ marginVertical: spacing(15) }}>
+    <View style={{ marginTop: spacing(15) }}>
       <FlatList
         data={data}
         keyExtractor={(_, index) => index.toString()}
@@ -54,7 +54,6 @@ const BannerCarousel = <T,>({
           </View>
         )}
       />
-
       <PaginationDots data={data} scrollX={scrollX} />
     </View>
   );

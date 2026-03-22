@@ -26,7 +26,7 @@ const CategoriesList: React.FC<Props> = ({ categories = [] }) => {
   };
 
   return (
-    <View style={styles.container}>
+    <View>
       <SectionHeader
         title="Categories"
         onViewAllPress={() => {}}
@@ -46,9 +46,6 @@ const CategoriesList: React.FC<Props> = ({ categories = [] }) => {
 export default CategoriesList;
 
 const styles = StyleSheet.create({
-  container: {
-    marginTop: spacing(20),
-  },
   header: {
     marginBottom: spacing(16),
     paddingHorizontal: spacing(16),

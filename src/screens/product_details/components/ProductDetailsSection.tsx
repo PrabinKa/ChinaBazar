@@ -124,8 +124,7 @@ const ProductDetailsSection: React.FC<ProductDetailsSectionProps> = ({
   };
 
   return (
-    <View style={styles.container}>
-      {/* Delivery Info */}
+    <View>
       <View style={styles.infoBox}>
         {/* Delivery */}
         <View style={styles.infoRow}>

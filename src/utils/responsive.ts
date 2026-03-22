@@ -1,29 +1,15 @@
-import { Dimensions, ScaledSize, PixelRatio } from 'react-native';
+import { Dimensions, PixelRatio } from 'react-native';
 
 const { width: SCREEN_WIDTH, height: SCREEN_HEIGHT } = Dimensions.get('window');
-
-export const WINDOW: ScaledSize = {
-  width: SCREEN_WIDTH,
-  height: SCREEN_HEIGHT,
-};
-
-// Device type based on width
-export const IS_SMALL_DEVICE = SCREEN_WIDTH < 375;
-export const IS_MEDIUM_DEVICE = SCREEN_WIDTH >= 375 && SCREEN_WIDTH < 414;
-export const IS_LARGE_DEVICE = SCREEN_WIDTH >= 414;
-
-// Orientation
-export const IS_PORTRAIT = SCREEN_HEIGHT > SCREEN_WIDTH;
-export const IS_LANDSCAPE = SCREEN_WIDTH > SCREEN_HEIGHT;
 
 // Base design dimensions
 const DESIGN_WIDTH = 375;
 const DESIGN_HEIGHT = 812;
 
 // Scale factors
-export const WIDTH_SCALE = SCREEN_WIDTH / DESIGN_WIDTH;
-export const HEIGHT_SCALE = SCREEN_HEIGHT / DESIGN_HEIGHT;
-export const MODERATE_SCALE = Math.min(WIDTH_SCALE, HEIGHT_SCALE);
+const WIDTH_SCALE = SCREEN_WIDTH / DESIGN_WIDTH;
+const HEIGHT_SCALE = SCREEN_HEIGHT / DESIGN_HEIGHT;
+const MODERATE_SCALE = Math.min(WIDTH_SCALE, HEIGHT_SCALE);
 
 // Pixel density
 const FONT_SCALE = PixelRatio.getFontScale(); // Adjusts font for user font settings

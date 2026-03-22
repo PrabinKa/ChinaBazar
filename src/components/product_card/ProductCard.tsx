@@ -8,7 +8,7 @@ import {
 } from 'react-native';
 import { Product } from '../../constants/data/products';
 import { colors, radius } from '../../theme';
-import { rf, spacing } from '../../utils';
+import { formatPrice, rf, spacing } from '../../utils';
 import Ionicons from '@react-native-vector-icons/ionicons';
 import { useNavigation } from '@react-navigation/native';
 import { AppStackNavigationProp } from '../../types/navigation';
@@ -31,11 +31,6 @@ export const ProductCard: React.FC<ProductCardProp> = ({
 
   const effectiveCardWidth = cardWidth ?? DEFAULT_CARD_WIDTH;
   const imageHeight = effectiveCardWidth * 0.8;
-
-  // Format price with comma separator
-  const formatPrice = (price: number) => {
-    return `Rs. ${price.toLocaleString('en-IN')}`;
-  };
 
   return (
     <TouchableOpacity

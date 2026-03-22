@@ -16,7 +16,7 @@ interface TodaysDealsProps {
 const TodaysDeals: React.FC<TodaysDealsProps> = ({ products = [] }) => {
 
   return (
-    <View style={styles.container}>
+    <View>
       <SectionHeader
         title="Today's Deal"
         onViewAllPress={() => {}}
@@ -38,9 +38,6 @@ const TodaysDeals: React.FC<TodaysDealsProps> = ({ products = [] }) => {
 };
 
 const styles = StyleSheet.create({
-  container: {
-    marginVertical: spacing(16),
-  },
   header: {
     marginBottom: spacing(16),
     paddingHorizontal: spacing(16),

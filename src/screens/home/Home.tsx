@@ -1,5 +1,5 @@
 import React from 'react';
-import { FlatList, StyleSheet, View } from 'react-native';
+import { FlatList, StyleSheet} from 'react-native';
 import { SafeAreaView } from 'react-native-safe-area-context';
 import { COLORS } from '../../theme/colors';
 import useHomeSections from './hooks/useHomeSections';
@@ -14,8 +14,6 @@ const Home = () => {
         renderItem={renderSectionItem}
         keyExtractor={keyExtractor}
         showsVerticalScrollIndicator={false}
-        ListHeaderComponent={<View style={{ height: 0 }} />}
-        ListFooterComponent={<View style={{ height: 20 }} />}
       />
     </SafeAreaView>
   );

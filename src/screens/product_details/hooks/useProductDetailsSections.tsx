@@ -9,10 +9,13 @@ import MediaGallery from '../components/MediaGallery';
 import ReviewCards from '../components/ReviewCards';
 import { Header } from '../../../components';
 import { AppStackNavigationProp } from '../../../types/navigation';
+import { StyleSheet, View } from 'react-native';
+import { colors } from '../../../theme';
 
 // Section types
 export type ProductDetailsSectionType =
   | 'header'
+  | 'divider'
   | 'image_carousel'
   | 'product_info'
   | 'product_variants'
@@ -190,6 +193,10 @@ const useProductDetailsSections = ({
         } as ProductVariantsData,
       },
       {
+        id: 'divider1',
+        type: 'divider',
+      },
+      {
         id: 'product_details',
         type: 'product_details',
         data: {
@@ -200,7 +207,11 @@ const useProductDetailsSections = ({
           specifications,
         } as ProductDetailsData,
       },
-            {
+      {
+        id: 'divider2',
+        type: 'divider',
+      },
+      {
         id: 'product_reviews',
         type: 'product_reviews',
         data: {
@@ -243,6 +254,8 @@ const useProductDetailsSections = ({
   const renderSectionItem = useCallback(
     ({ item }: { item: ProductDetailsSectionItem }): React.ReactElement => {
       switch (item.type) {
+        case 'divider':
+          return <View style={styles.divider} />;
         case 'header': {
           const data = item.data as HeaderData;
           return (
@@ -334,3 +347,11 @@ const useProductDetailsSections = ({
 };
 
 export default useProductDetailsSections;
+
+const styles = StyleSheet.create({
+  divider: {
+    height: 4,
+    width: '100%',
+    backgroundColor: colors.surfaceVariant,
+  },
+});

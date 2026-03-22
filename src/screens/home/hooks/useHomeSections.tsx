@@ -1,5 +1,5 @@
 import { useMemo, useCallback } from 'react';
-import { Image, View } from 'react-native';
+import { Image, StyleSheet, View } from 'react-native';
 import { Banner, BANNERS } from '../../../constants/data/banner';
 import { CATEGORIES, TCategory } from '../../../constants/data/categories';
 import { MORE_DEALS, TMoreDeals } from '../../../constants/data/moredeals';
@@ -17,14 +17,17 @@ import {
 } from '../../../constants/data/offersection';
 import OffersSection from '../components/OffersSection';
 import { TABS, Tab } from '../../../constants/data/tabs';
-import { ProductGrid } from '../components/ProductGrid';
-import { TabBar } from '../components/TabBar';
 import { ProductsWithTabs } from '../components/ProductsWithTabs';
+import { rh } from '../../../utils';
+import { colors } from '../../../theme';
+
+const SECTION_SPACING = rh(6);
 
 // Section types
 export type SectionType =
   | 'header'
   | 'banner'
+  | 'divider'
   | 'categories'
   | 'more_deals'
   | 'todays_deals'
@@ -90,6 +93,10 @@ const useHomeSections = () => {
         } as BannerSectionData,
       },
       {
+        id: 'divider1',
+        type: 'divider',
+      },
+      {
         id: 'categories',
         type: 'categories',
         data: {
@@ -97,11 +104,19 @@ const useHomeSections = () => {
         } as CategoriesSectionData,
       },
       {
+        id: 'divider2',
+        type: 'divider',
+      },
+      {
         id: 'more_deals',
         type: 'more_deals',
         data: {
           deals: MORE_DEALS,
         } as MoreDealsSectionData,
+      },
+      {
+        id: 'divider3',
+        type: 'divider',
       },
       {
         id: 'todays_deals',
@@ -119,6 +134,10 @@ const useHomeSections = () => {
         } as OffersSectionData,
       },
       {
+        id: 'divider',
+        type: 'divider',
+      },
+      {
         id: 'products_with_tabs',
         type: 'products_with_tabs',
         data: {
@@ -134,51 +153,61 @@ const useHomeSections = () => {
   }: {
     item: HomeSectionItem;
   }): React.ReactElement => {
-    switch (item.type) {
-      case 'header':
-        return <HomeHeader />;
-      case 'banner': {
-        const bannerData = item.data as BannerSectionData;
-        return (
-          <BannerCarousel
-            data={bannerData.banners}
-            renderItem={bannerData.renderItem}
-          />
-        );
+    const renderContent = () => {
+      switch (item.type) {
+        case 'header':
+          return <HomeHeader />;
+        case 'divider':
+          return <View style={styles.divider} />;
+        case 'banner': {
+          const bannerData = item.data as BannerSectionData;
+          return (
+            <BannerCarousel
+              data={bannerData.banners}
+              renderItem={bannerData.renderItem}
+            />
+          );
+        }
+        case 'categories': {
+          const categoriesData = item.data as CategoriesSectionData;
+          return <CategoriesList categories={categoriesData.categories} />;
+        }
+        case 'more_deals': {
+          const moreDealsData = item.data as MoreDealsSectionData;
+          return <MoreDealsSection deals={moreDealsData.deals} />;
+        }
+        case 'todays_deals': {
+          const todaysDealsData = item.data as TodaysDealsSectionData;
+          return <TodaysDeals products={todaysDealsData.products} />;
+        }
+        case 'offers_section': {
+          const offersSectionData = item.data as OffersSectionData;
+          return (
+            <OffersSection
+              offersData={offersSectionData.offersData}
+              offersGrid={offersSectionData.offersGrid}
+            />
+          );
+        }
+        case 'products_with_tabs': {
+          const tabsData = item.data as ProductsWithTabsData;
+          return (
+            <ProductsWithTabs
+              tabs={tabsData.tabs}
+              products={tabsData.products}
+            />
+          );
+        }
+        default:
+          return <></>;
       }
-      case 'categories': {
-        const categoriesData = item.data as CategoriesSectionData;
-        return <CategoriesList categories={categoriesData.categories} />;
-      }
-      case 'more_deals': {
-        const moreDealsData = item.data as MoreDealsSectionData;
-        return <MoreDealsSection deals={moreDealsData.deals} />;
-      }
-      case 'todays_deals': {
-        const todaysDealsData = item.data as TodaysDealsSectionData;
-        return <TodaysDeals products={todaysDealsData.products} />;
-      }
-      case 'offers_section': {
-        const offersSectionData = item.data as OffersSectionData;
-        return (
-          <OffersSection
-            offersData={offersSectionData.offersData}
-            offersGrid={offersSectionData.offersGrid}
-          />
-        );
-      }
-      case 'products_with_tabs': {
-        const tabsData = item.data as ProductsWithTabsData;
-        return (
-          <ProductsWithTabs
-            tabs={tabsData.tabs}
-            products={tabsData.products}
-          />
-        );
-      }
-      default:
-        return <></>;
-    }
+    };
+
+    return (
+      <View style={styles.sectionContainer}>
+        {renderContent()}
+      </View>
+    );
   };
 
   const keyExtractor = (item: HomeSectionItem) => item.id;
@@ -189,5 +218,16 @@ const useHomeSections = () => {
     keyExtractor,
   };
 };
+
+const styles = StyleSheet.create({
+  sectionContainer: {
+    marginVertical: SECTION_SPACING,
+  },
+  divider: {
+    height: 4,
+    width: '100%',
+    backgroundColor: colors.surfaceVariant,
+  },
+});
 
 export default useHomeSections;

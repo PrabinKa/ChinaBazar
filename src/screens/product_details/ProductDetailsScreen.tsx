@@ -47,11 +47,11 @@ const ProductDetailsScreen: React.FC<ProductDetailsScreenProps> = ({
   });
 
   const handleAddToCart = useCallback(() => {
-    console.log('Add to Cart pressed');
+    // Add to cart logic
   }, []);
 
   const handleBuyNow = useCallback(() => {
-    console.log('Buy Now pressed');
+    // Buy now logic
   }, []);
 
   return (

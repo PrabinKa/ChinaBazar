@@ -1,11 +1,5 @@
 import React from 'react';
-import {
-  StyleSheet,
-  View,
-  Text,
-  ScrollView,
-  Image,
-} from 'react-native';
+import { StyleSheet, View, Text, ScrollView, Image } from 'react-native';
 import { spacing, rf, layout } from '../../../utils';
 import { colors } from '../../../theme';
 import Ionicons from '@react-native-vector-icons/ionicons';
@@ -62,20 +56,19 @@ const ReviewCard: React.FC<ReviewCardProps> = ({ review }) => {
           <Text style={styles.avatarInitial}>{initial}</Text>
         </View>
         <View style={styles.headerRight}>
-          <Text style={styles.reviewerName}>{review.reviewerName}</Text>
           <View style={styles.ratingDateRow}>
             {renderStars(review.rating)}
             <Text style={styles.dot}>·</Text>
             <Text style={styles.date}>{review.date}</Text>
           </View>
+          <Text style={styles.reviewerName}>{review.reviewerName}</Text>
         </View>
       </View>
 
       {/* Review Body */}
       <View style={styles.body}>
         <Text style={styles.reviewText}>{review.text}</Text>
-        
-        {/* Review Images Scroll */}
+
         {review.images.length > 0 && (
           <ScrollView
             horizontal
@@ -87,7 +80,9 @@ const ReviewCard: React.FC<ReviewCardProps> = ({ review }) => {
                 key={image.id}
                 style={[
                   styles.reviewImageContainer,
-                  index === 3 && showMoreIndicator && styles.lastImageWithOverlay,
+                  index === 3 &&
+                    showMoreIndicator &&
+                    styles.lastImageWithOverlay,
                 ]}
               >
                 <Image source={{ uri: image.uri }} style={styles.reviewImage} />
@@ -102,7 +97,6 @@ const ReviewCard: React.FC<ReviewCardProps> = ({ review }) => {
         )}
       </View>
 
-      {/* Footer: Color Family, Size, Thumbs Up */}
       <View style={styles.footer}>
         <Text style={styles.variantInfo}>
           Color Family: {review.colorFamily}, Size: {review.size}
@@ -155,7 +149,7 @@ const styles = StyleSheet.create({
     width: rf(36),
     height: rf(36),
     borderRadius: rf(999),
-    ...layout.center
+    ...layout.center,
   },
   avatarInitial: {
     color: '#FFFFFF',
@@ -169,14 +163,14 @@ const styles = StyleSheet.create({
   reviewerName: {
     fontSize: rf(13),
     fontWeight: '700',
-    color: colors.textPrimary,
+    color: colors.textSecondary,
     marginBottom: spacing(2),
   },
   ratingDateRow: {
-    ...layout.rowAlignCenter
+    ...layout.rowAlignCenter,
   },
   starsRow: {
-    ...layout.rowAlignCenter
+    ...layout.rowAlignCenter,
   },
   dot: {
     fontSize: rf(11),
@@ -215,7 +209,7 @@ const styles = StyleSheet.create({
   moreOverlay: {
     ...StyleSheet.absoluteFillObject,
     backgroundColor: 'rgba(0, 0, 0, 0.55)',
-    ...layout.center
+    ...layout.center,
   },
   moreText: {
     color: '#FFFFFF',
@@ -223,7 +217,7 @@ const styles = StyleSheet.create({
     fontWeight: '700',
   },
   footer: {
-    ...layout.spaceBetweenRow
+    ...layout.spaceBetweenRow,
   },
   variantInfo: {
     fontSize: rf(11),
