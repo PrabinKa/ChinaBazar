@@ -4,6 +4,7 @@ import ProductImageCarousel from '../components/ProductImageCarousel';
 import ProductInfo from '../components/ProductInfo';
 import ProductVariants from '../components/ProductVariants';
 import ProductDetailsSection from '../components/ProductDetailsSection';
+import ProductReviews from '../components/ProductReviews';
 import { Header } from '../../../components';
 import { AppStackNavigationProp } from '../../../types/navigation';
 
@@ -13,6 +14,7 @@ export type ProductDetailsSectionType =
   | 'image_carousel'
   | 'product_info'
   | 'product_variants'
+  | 'product_reviews'
   | 'product_details';
 
 export interface ProductDetailsSectionItem {
@@ -43,6 +45,19 @@ export interface ProductVariantsData {
   storage: string[];
   selectedColorIndex: number;
   selectedStorageIndex: number;
+}
+
+export interface ProductReviewsData {
+  rating: number;
+  totalReviews: number;
+  starBreakdown?: {
+    5: number;
+    4: number;
+    3: number;
+    2: number;
+    1: number;
+  };
+  onViewAll?: () => void;
 }
 
 export interface ProductDetailsData {
@@ -94,6 +109,19 @@ const useProductDetailsSections = ({
     shippingFee = 0,
     variants = [],
   } = product || {};
+
+  // Generate mock star breakdown based on total reviews
+  // In a real app, this would come from the API
+  const starBreakdown = useMemo(() => {
+    const baseCount = Math.floor(totalReviews / 20);
+    return {
+      5: Math.floor(baseCount * 0.5 + Math.random() * baseCount * 0.3),
+      4: Math.floor(baseCount * 0.25 + Math.random() * baseCount * 0.15),
+      3: Math.floor(baseCount * 0.1 + Math.random() * baseCount * 0.1),
+      2: Math.floor(baseCount * 0.05 + Math.random() * baseCount * 0.05),
+      1: Math.floor(baseCount * 0.02 + Math.random() * baseCount * 0.03),
+    };
+  }, [totalReviews]);
 
   // Extract color variants from product data or use default
   const colorOptions = useMemo(() => {
@@ -168,6 +196,15 @@ const useProductDetailsSections = ({
           specifications,
         } as ProductDetailsData,
       },
+            {
+        id: 'product_reviews',
+        type: 'product_reviews',
+        data: {
+          rating,
+          totalReviews,
+          starBreakdown,
+        } as ProductReviewsData,
+      },
     ];
   }, [
     images,
@@ -181,6 +218,7 @@ const useProductDetailsSections = ({
     selectedColorIndex,
     storageOptions,
     selectedStorageIndex,
+    starBreakdown,
     location,
     shippingFee,
     highlights,
@@ -245,6 +283,17 @@ const useProductDetailsSections = ({
               description={data.description}
               specifications={data.specifications}
               disclaimer={data.disclaimer}
+            />
+          );
+        }
+        case 'product_reviews': {
+          const data = item.data as ProductReviewsData;
+          return (
+            <ProductReviews
+              rating={data.rating}
+              totalReviews={data.totalReviews}
+              starBreakdown={data.starBreakdown}
+              onViewAll={data.onViewAll}
             />
           );
         }
